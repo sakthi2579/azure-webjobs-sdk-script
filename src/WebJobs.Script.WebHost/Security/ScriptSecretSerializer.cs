@@ -32,7 +32,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
         private static TResult ResolveSerializerAndRun<TResult>(string secretsJson, Func<IScriptSecretSerializer, JObject, TResult> func)
         {
             JObject secrets = JObject.Parse(secretsJson);
-            int formatVersion = secrets.Property("version")?.Value<int>() ?? 0;
+            int formatVersion = secrets.Value<int>("version");
 
             IScriptSecretSerializer serializer = GetSerializer(formatVersion);
 
