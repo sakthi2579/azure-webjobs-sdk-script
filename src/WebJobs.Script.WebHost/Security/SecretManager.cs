@@ -22,7 +22,6 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 
         private readonly string _secretsPath;
         private readonly ConcurrentDictionary<string, Dictionary<string, string>> _secretsMap = new ConcurrentDictionary<string, Dictionary<string, string>>();
-        private readonly ScriptSecretReader _scriptSecretReader = new ScriptSecretReader();
         private readonly IKeyValueConverterFactory _keyValueConverterFactory;
         private readonly FileSystemWatcher _fileWatcher;
         private HostSecretsInfo _hostSecrets;
@@ -81,7 +80,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
                 {
                     // load the secrets file
                     string secretsJson = File.ReadAllText(secretFilePath);
-                    hostSecrets = _scriptSecretReader.ReadHostSecrets(secretsJson);
+                    hostSecrets = ScriptSecretSerializer.DeserializeHostSecrets(secretsJson);
                 }
                 else
                 {
@@ -95,7 +94,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
                         }
                     };
 
-                    string secretContent = _scriptSecretReader.WriteHostSecrets(hostSecrets);
+                    string secretContent = ScriptSecretSerializer.SerializeHostSecrets(hostSecrets);
                     File.WriteAllText(secretFilePath, secretContent);
                 }
 
@@ -127,7 +126,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
                 {
                     // load the secrets file
                     string secretsJson = File.ReadAllText(secretFilePath);
-                    secrets = _scriptSecretReader.ReadFunctionSecrets(secretsJson);
+                    secrets = ScriptSecretSerializer.DeserializeFunctionSecrets(secretsJson);
                 }
                 else
                 {
@@ -137,7 +136,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
                         GenerateSecret(DefaultFunctionKeyName)
                     };
 
-                    string secretsContent = _scriptSecretReader.WriteFunctionSecrets(secrets);
+                    string secretsContent = ScriptSecretSerializer.SerializeFunctionSecrets(secrets);
                     File.WriteAllText(secretFilePath, secretsContent);
                 }
 

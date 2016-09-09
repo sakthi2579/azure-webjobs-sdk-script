@@ -11,7 +11,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
     public sealed class DefaultKeyValueConverterFactory : IKeyValueConverterFactory
     {
-        private static readonly PlainTextKeyValueConverter PlainTextConverter = new PlainTextKeyValueConverter();
+        private static readonly PlaintextKeyValueConverter PlainTextConverter = new PlaintextKeyValueConverter();
 
         public IKeyValueConverter GetValueConverter(Key key, KeyConversionAction action)
         {

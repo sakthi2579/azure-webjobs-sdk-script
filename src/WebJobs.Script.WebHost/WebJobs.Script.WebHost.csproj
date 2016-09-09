@@ -347,7 +347,7 @@
     <Compile Include="Security\Key.cs" />
     <Compile Include="Security\DefaultKeyValueConverterFactory.cs" />
     <Compile Include="Security\ScriptSecretSerializerV1.cs" />
-    <Compile Include="Security\ScriptSecretReader.cs" />
+    <Compile Include="Security\ScriptSecretSerializer.cs" />
     <Compile Include="Security\ScriptSecretSerializerV0.cs" />
     <Compile Include="Security\KeyConversionAction.cs" />
     <Compile Include="Security\SecretManager.cs" />

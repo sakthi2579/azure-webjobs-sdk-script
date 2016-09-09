@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
-    internal sealed class ScriptSecretReader
+    internal static class ScriptSecretSerializer
     {
         private static List<IScriptSecretSerializer> _secretFormatters = new List<IScriptSecretSerializer>
         {
@@ -21,31 +21,30 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 
         private static IScriptSecretSerializer DefaultSerializer => GetSerializer(_secretFormatters.Max(i => i.SupportedFormatVersion));
 
-        public IList<Key> ReadFunctionSecrets(string secretsJson)
-        {
-            var secretsObject = JObject.Parse(secretsJson);
+        public static string SerializeFunctionSecrets(IList<Key> secrets) => DefaultSerializer.SerializeFunctionSecrets(secrets);
 
-            IScriptSecretSerializer serializer = GetSerializer(secretsObject);
-            return serializer.DeserializeFunctionSecrets(secretsObject);
+        public static string SerializeHostSecrets(HostSecrets secrets) => DefaultSerializer.SerializeHostSecrets(secrets);
+
+        public static IList<Key> DeserializeFunctionSecrets(string secretsJson)
+        {
+            Tuple<IScriptSecretSerializer, JObject> serializerInfo = GetSerializer(secretsJson);
+            return serializerInfo.Item1.DeserializeFunctionSecrets(serializerInfo.Item2);
         }
 
-        public HostSecrets ReadHostSecrets(string secretsJson)
+        public static HostSecrets DeserializeHostSecrets(string secretsJson)
         {
-            var secrets = JObject.Parse(secretsJson);
-
-            IScriptSecretSerializer serializer = GetSerializer(secrets);
-            return serializer.DeserializeHostSecrets(secrets);
+            Tuple<IScriptSecretSerializer, JObject> serializerInfo = GetSerializer(secretsJson);
+            return serializerInfo.Item1.DeserializeHostSecrets(serializerInfo.Item2);
         }
 
-        public string WriteFunctionSecrets(IList<Key> secrets) => DefaultSerializer.SerializeFunctionSecrets(secrets);
-
-        public string WriteHostSecrets(HostSecrets secrets) => DefaultSerializer.SerializeHostSecrets(secrets);
-
-        private static IScriptSecretSerializer GetSerializer(JObject secrets)
+        private static Tuple<IScriptSecretSerializer, JObject> GetSerializer(string secretsJson)
         {
+            JObject secrets = JObject.Parse(secretsJson);
             int formatVersion = secrets.Property("version")?.Value<int>() ?? 0;
 
-            return GetSerializer(formatVersion);
+            IScriptSecretSerializer serializer = GetSerializer(formatVersion);
+
+            return Tuple.Create(serializer, secrets);
         }
 
         private static IScriptSecretSerializer GetSerializer(int formatVersion)
