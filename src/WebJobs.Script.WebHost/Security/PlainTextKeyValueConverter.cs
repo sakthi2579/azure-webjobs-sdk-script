@@ -12,13 +12,6 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
             return key.Value;
         }
 
-        public Key WriteKeyValue(Key key)
-        {
-            return new Key
-            {
-                Name = key.Name,
-                Value = key.Value
-            };
-        }
+        public Key WriteKeyValue(Key key) => new Key(key.Name, key.Value);
     }
 }

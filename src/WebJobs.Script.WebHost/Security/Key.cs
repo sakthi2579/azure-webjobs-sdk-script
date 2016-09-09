@@ -8,6 +8,16 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
     public class Key : IEquatable<Key>
     {
+        public Key()
+        {
+        }
+
+        public Key(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
+
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 

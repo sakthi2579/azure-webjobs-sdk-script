@@ -225,11 +225,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
                 // Replace pluses as they are problematic as URL values
                 secret = secret.Replace('+', 'a');
 
-                var key = new Key
-                {
-                    Name = name,
-                    Value = secret
-                };
+                var key = new Key(name, secret);
 
                 return WriteSecretValue(key);
             }

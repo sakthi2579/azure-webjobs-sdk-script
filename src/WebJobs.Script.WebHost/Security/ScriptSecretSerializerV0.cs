@@ -63,6 +63,6 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
             return hostSecrets.ToString();
         }
 
-        private static Key CreateKeyFromSecret(string secret) => new Key { Name = string.Empty, Value = secret };
+        private static Key CreateKeyFromSecret(string secret) => new Key(string.Empty, secret);
     }
 }
