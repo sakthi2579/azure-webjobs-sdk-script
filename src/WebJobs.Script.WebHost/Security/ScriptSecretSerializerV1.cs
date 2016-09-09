@@ -18,15 +18,11 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 
         public int SupportedFormatVersion => 1;
 
-        public IList<Key> DeserializeFunctionSecrets(JObject secrets)
-        {
-            return secrets.Property(FunctionKeysPropertyName)?.Value.ToObject<List<Key>>();
-        }
+        public IList<Key> DeserializeFunctionSecrets(JObject secrets) => secrets.Property(FunctionKeysPropertyName)?.Value.ToObject<List<Key>>();
 
-        public HostSecrets DeserializeHostSecrets(JObject secrets)
-        {
-            return secrets.ToObject<HostSecrets>();
-        }
+        public HostSecrets DeserializeHostSecrets(JObject secrets) => secrets.ToObject<HostSecrets>();
+
+        public string SerializeHostSecrets(HostSecrets secrets) => JsonConvert.SerializeObject(secrets, Formatting.Indented);
 
         public string SerializeFunctionSecrets(IList<Key> secrets)
         {
@@ -37,11 +33,6 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
             };
 
             return functionSecrets.ToString(Formatting.Indented);
-        }
-
-        public string SerializeHostSecrets(HostSecrets secrets)
-        {
-            return JsonConvert.SerializeObject(secrets, Formatting.Indented);
         }
     }
 }
