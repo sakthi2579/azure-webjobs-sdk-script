@@ -25,26 +25,18 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 
         public static string SerializeHostSecrets(HostSecrets secrets) => DefaultSerializer.SerializeHostSecrets(secrets);
 
-        public static IList<Key> DeserializeFunctionSecrets(string secretsJson)
-        {
-            Tuple<IScriptSecretSerializer, JObject> serializerInfo = GetSerializer(secretsJson);
-            return serializerInfo.Item1.DeserializeFunctionSecrets(serializerInfo.Item2);
-        }
+        public static IList<Key> DeserializeFunctionSecrets(string secretsJson) => ResolveSerializerAndRun(secretsJson, (s, o) => s.DeserializeFunctionSecrets(o));
 
-        public static HostSecrets DeserializeHostSecrets(string secretsJson)
-        {
-            Tuple<IScriptSecretSerializer, JObject> serializerInfo = GetSerializer(secretsJson);
-            return serializerInfo.Item1.DeserializeHostSecrets(serializerInfo.Item2);
-        }
+        public static HostSecrets DeserializeHostSecrets(string secretsJson) => ResolveSerializerAndRun(secretsJson, (s, o) => s.DeserializeHostSecrets(o));
 
-        private static Tuple<IScriptSecretSerializer, JObject> GetSerializer(string secretsJson)
+        private static TResult ResolveSerializerAndRun<TResult>(string secretsJson, Func<IScriptSecretSerializer, JObject, TResult> func)
         {
             JObject secrets = JObject.Parse(secretsJson);
             int formatVersion = secrets.Property("version")?.Value<int>() ?? 0;
 
             IScriptSecretSerializer serializer = GetSerializer(formatVersion);
 
-            return Tuple.Create(serializer, secrets);
+            return func(serializer, secrets);
         }
 
         private static IScriptSecretSerializer GetSerializer(int formatVersion)
