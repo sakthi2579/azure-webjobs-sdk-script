@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
-    public sealed class PlaintextKeyValueConverter : IKeyValueReader, IKeyValueWriter
+    public sealed class PlaintextKeyValueConverter : KeyValueConverter, IKeyValueReader, IKeyValueWriter
     {
-        private readonly FileAccess _access;
-
         public PlaintextKeyValueConverter(FileAccess access)
+            : base(access)
         {
-            _access = access;
         }
 
         public string ReadValue(Key key)
@@ -28,14 +26,6 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
             ValidateAccess(FileAccess.Write);
 
             return new Key(key.Name, key.Value);
-        }
-
-        private void ValidateAccess(FileAccess access)
-        {
-            if (!_access.HasFlag(access))
-            {
-                throw new InvalidOperationException($"The current {nameof(PlaintextKeyValueConverter)} does not support {access.ToString("G")} access.");
-            }
         }
     }
 }

@@ -13,6 +13,9 @@ namespace Microsoft.Azure.WebJobs.Script
         public const string AzureWebsiteSku = "WEBSITE_SKU";
         public const string AzureWebsitePlaceholderMode = "WEBSITE_PLACEHOLDER_MODE";
         public const string AzureWebsiteHomePath = "HOME";
+        public const string AzureWebsiteEncryptionKey = "WEBSITE_AUTH_ENCRYPTION_KEY";
         public const string AzureWebJobsScriptRoot = "AzureWebJobsScriptRoot";
+        public const string AzureWebJobsLocalEncryptionKey = "AzureWebJobsEncryptionKey";
+        public const string AzureWebJobsDefaultEncryptionKeyId = "AzureWebJobsDefaultEncryptionKeyId";
     }
 }
