@@ -333,7 +333,6 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Handlers\WebScriptHostHandler.cs" />
-    <Compile Include="Security\AesCryptoKeyValueConverter.cs" />
     <Compile Include="Security\HostSecretsInfo.cs" />
     <Compile Include="Security\IScriptSecretSerializer.cs" />
     <Compile Include="Security\PlainTextKeyValueConverter.cs" />
@@ -350,7 +349,7 @@
     <Compile Include="Security\ScriptSecretSerializerV1.cs" />
     <Compile Include="Security\ScriptSecretReader.cs" />
     <Compile Include="Security\ScriptSecretSerializerV0.cs" />
-    <Compile Include="Security\SecretCryptoAction.cs" />
+    <Compile Include="Security\KeyConversionAction.cs" />
     <Compile Include="Security\SecretManager.cs" />
     <Compile Include="SuspendedSynchronizationContextScope.cs" />
     <Compile Include="WebHooks\DynamicWebHookReceiverConfig.cs" />

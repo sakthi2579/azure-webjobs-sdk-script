@@ -365,7 +365,6 @@
     <Compile Include="PythonEndToEndTests.cs" />
     <Compile Include="ScriptHostManagerTests.cs" />
     <Compile Include="ScriptHostTests.cs" />
-    <Compile Include="Security\AesCryptoKeyValueConverterTests.cs" />
     <Compile Include="Security\ScriptSecretSerializerV0Tests.cs" />
     <Compile Include="Security\ScriptSecretSerializerV1Tests.cs" />
     <Compile Include="StandbyModeTests.cs" />
