@@ -32,7 +32,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 
         private void ValidateAccess(FileAccess access)
         {
-            if (_access.HasFlag(access))
+            if (!_access.HasFlag(access))
             {
                 throw new InvalidOperationException($"The current {nameof(PlaintextKeyValueConverter)} does not support {access.ToString("G")} access.");
             }
