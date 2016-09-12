@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 namespace Microsoft.Azure.WebJobs.Script.WebHost
@@ -38,12 +39,42 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
             }
 
             return string.Equals(Name, other.Name, StringComparison.Ordinal) &&
-                string.Equals(Value, other.Value, StringComparison.Ordinal) &&
+                SecretValueEquals(Value, other.Value) &&
                 string.Equals(EncryptionKeyId, other.EncryptionKeyId, StringComparison.Ordinal) &&
                 IsEncrypted == other.IsEncrypted;
         }
 
         public override bool Equals(object obj) => Equals(obj as Key);
+
+        /// <summary>
+        /// Provides a time consistent comparison of two secrets in the form of two strings.
+        /// This prevents security attacks that attempt to determine key values based on response
+        /// times.
+        /// </summary>
+        /// <param name="inputA">The first secret to compare.</param>
+        /// <param name="inputB">The second secret to compare.</param>
+        /// <returns>Returns <c>true</c> if the two secrets are equal, <c>false</c> otherwise.</returns>
+        [MethodImpl(MethodImplOptions.NoOptimization)]
+        public static bool SecretValueEquals(string inputA, string inputB)
+        {
+            if (ReferenceEquals(inputA, inputB))
+            {
+                return true;
+            }
+
+            if (inputA == null || inputB == null || inputA.Length != inputB.Length)
+            {
+                return false;
+            }
+
+            bool areSame = true;
+            for (int i = 0; i < inputA.Length; i++)
+            {
+                areSame &= inputA[i] == inputB[i];
+            }
+
+            return areSame;
+        }
 
         public override int GetHashCode() => GetPropertyHashCode(Name) ^ GetPropertyHashCode(Value) ^ GetPropertyHashCode(EncryptionKeyId) ^ IsEncrypted.GetHashCode();
 

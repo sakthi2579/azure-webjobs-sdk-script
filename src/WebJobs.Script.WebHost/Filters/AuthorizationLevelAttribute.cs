@@ -71,14 +71,14 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost.Filters
                 // see if the key specified is the master key
                 HostSecretsInfo hostSecrets = secretManager.GetHostSecrets();
                 if (!string.IsNullOrEmpty(hostSecrets.MasterKey) &&
-                    SecretEqual(keyValue, hostSecrets.MasterKey))
+                    Key.SecretValueEquals(keyValue, hostSecrets.MasterKey))
                 {
                     return AuthorizationLevel.Admin;
                 }
 
                 // see if the key specified matches the host function key
                 if (hostSecrets.FunctionKeys != null &&
-                    hostSecrets.FunctionKeys.Any(k => SecretEqual(keyValue, k.Value)))
+                    hostSecrets.FunctionKeys.Any(k => Key.SecretValueEquals(keyValue, k.Value)))
                 {
                     return AuthorizationLevel.Function;
                 }
@@ -88,7 +88,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost.Filters
                 {
                     Dictionary<string, string> functionSecrets = secretManager.GetFunctionSecrets(functionName);
                     if (functionSecrets != null &&
-                        functionSecrets.Values.Any(s => SecretEqual(keyValue, s)))
+                        functionSecrets.Values.Any(s => Key.SecretValueEquals(keyValue, s)))
                     {
                         return AuthorizationLevel.Function;
                     }
@@ -96,36 +96,6 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost.Filters
             }
 
             return AuthorizationLevel.Anonymous;
-        }
-
-        /// <summary>
-        /// Provides a time consistent comparison of two secrets in the form of two strings.
-        /// This prevents security attacks that attempt to determine key values based on response
-        /// times.
-        /// </summary>
-        /// <param name="inputA">The first secret to compare.</param>
-        /// <param name="inputB">The second secret to compare.</param>
-        /// <returns>Returns <c>true</c> if the two secrets are equal, <c>false</c> otherwise.</returns>
-        [MethodImpl(MethodImplOptions.NoOptimization)]
-        private static bool SecretEqual(string inputA, string inputB)
-        {
-            if (ReferenceEquals(inputA, inputB))
-            {
-                return true;
-            }
-
-            if (inputA == null || inputB == null || inputA.Length != inputB.Length)
-            {
-                return false;
-            }
-
-            bool areSame = true;
-            for (int i = 0; i < inputA.Length; i++)
-            {
-                areSame &= inputA[i] == inputB[i];
-            }
-
-            return areSame;
         }
     }
 }
