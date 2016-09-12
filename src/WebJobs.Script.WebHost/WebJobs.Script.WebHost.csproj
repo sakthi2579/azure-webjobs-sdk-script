@@ -334,11 +334,12 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Handlers\WebScriptHostHandler.cs" />
     <Compile Include="Security\HostSecretsInfo.cs" />
+    <Compile Include="Security\IKeyValueWriter.cs" />
     <Compile Include="Security\IScriptSecretSerializer.cs" />
     <Compile Include="Security\PlainTextKeyValueConverter.cs" />
     <Compile Include="Security\HostSecrets.cs" />
     <Compile Include="Security\IKeyValueConverterFactory.cs" />
-    <Compile Include="Security\IKeyValueConverter.cs" />
+    <Compile Include="Security\IKeyValueReader.cs" />
     <Compile Include="Models\FunctionInvocation.cs" />
     <Compile Include="Models\FunctionMetrics.cs" />
     <Compile Include="Models\FunctionStatus.cs" />
@@ -349,7 +350,6 @@
     <Compile Include="Security\ScriptSecretSerializerV1.cs" />
     <Compile Include="Security\ScriptSecretSerializer.cs" />
     <Compile Include="Security\ScriptSecretSerializerV0.cs" />
-    <Compile Include="Security\KeyConversionAction.cs" />
     <Compile Include="Security\SecretManager.cs" />
     <Compile Include="SuspendedSynchronizationContextScope.cs" />
     <Compile Include="WebHooks\DynamicWebHookReceiverConfig.cs" />

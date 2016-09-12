@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,10 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
     public sealed class DefaultKeyValueConverterFactory : IKeyValueConverterFactory
     {
-        private static readonly PlaintextKeyValueConverter PlainTextConverter = new PlaintextKeyValueConverter();
+        private static readonly PlaintextKeyValueConverter PlainTextValueConverter = new PlaintextKeyValueConverter(FileAccess.ReadWrite);
 
-        public IKeyValueConverter GetValueConverter(Key key, KeyConversionAction action)
-        {
-            return PlainTextConverter;
-        }
+        public IKeyValueReader GetValueReader(Key key) => PlainTextValueConverter;
+
+        public IKeyValueWriter GetValueWriter(Key key) => PlainTextValueConverter;
     }
 }

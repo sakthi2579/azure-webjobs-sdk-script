@@ -11,6 +11,8 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
     public interface IKeyValueConverterFactory
     {
-        IKeyValueConverter GetValueConverter(Key key, KeyConversionAction action);
+        IKeyValueReader GetValueReader(Key key);
+
+        IKeyValueWriter GetValueWriter(Key key);
     }
 }

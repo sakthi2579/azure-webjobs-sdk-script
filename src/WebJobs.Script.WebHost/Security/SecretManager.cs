@@ -146,14 +146,14 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 
         private string ReadSecretValue(Key key)
         {
-            IKeyValueConverter converter = _keyValueConverterFactory.GetValueConverter(key, KeyConversionAction.Read);
-            return converter.ReadKeyValue(key);
+            IKeyValueReader reader = _keyValueConverterFactory.GetValueReader(key);
+            return reader.ReadValue(key);
         }
 
         private Key WriteSecretValue(Key key)
         {
-            IKeyValueConverter converter = _keyValueConverterFactory.GetValueConverter(key, KeyConversionAction.Write);
-            return converter.WriteKeyValue(key);
+            IKeyValueWriter writer = _keyValueConverterFactory.GetValueWriter(key);
+            return writer.WriteValue(key);
         }
 
         /// <summary>

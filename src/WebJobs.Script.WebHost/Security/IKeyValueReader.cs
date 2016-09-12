@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
-    public interface IKeyValueConverter
+    public interface IKeyValueReader
     {
-        string ReadKeyValue(Key key);
-
-        Key WriteKeyValue(Key key);
+        string ReadValue(Key key);
     }
 }
