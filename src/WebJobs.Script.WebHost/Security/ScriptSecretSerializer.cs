@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
-    internal static class ScriptSecretSerializer
+    public static class ScriptSecretSerializer
     {
         private static List<IScriptSecretSerializer> _secretFormatters = new List<IScriptSecretSerializer>
         {

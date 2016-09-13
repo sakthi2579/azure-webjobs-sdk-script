@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
-    internal interface IScriptSecretSerializer
+    public interface IScriptSecretSerializer
     {
         int SupportedFormatVersion { get; }
 
