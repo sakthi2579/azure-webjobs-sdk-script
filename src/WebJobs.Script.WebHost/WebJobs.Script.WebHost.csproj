@@ -135,6 +135,9 @@
       <HintPath>..\..\packages\Microsoft.Azure.NotificationHubs.1.0.7\lib\net45-full\Microsoft.Azure.NotificationHubs.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Azure.Web.Cryptography">
+      <HintPath>..\Web.Cryptography\bin\Debug\Microsoft.Azure.Web.Cryptography.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.WebJobs, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Azure.WebJobs.Core.2.0.0-beta1-10398\lib\net45\Microsoft.Azure.WebJobs.dll</HintPath>
       <Private>True</Private>
@@ -338,10 +341,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Handlers\WebScriptHostHandler.cs" />
     <Compile Include="Security\AesCryptoKeyValueConverter.cs" />
-    <Compile Include="Security\CryptographicKey.cs" />
-    <Compile Include="Security\DefaultEncryptionKeyResolver.cs" />
     <Compile Include="Security\HostSecretsInfo.cs" />
-    <Compile Include="Security\IEncryptionKeyResolver.cs" />
     <Compile Include="Security\IKeyValueWriter.cs" />
     <Compile Include="Security\IScriptSecretSerializer.cs" />
     <Compile Include="Security\KeyValueConverter.cs" />
