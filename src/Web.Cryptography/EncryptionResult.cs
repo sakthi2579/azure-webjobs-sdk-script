@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Azure.Web.Cryptography
 {
-    public class EncryptionResult
+    public class EncryptionResult<T>
     {
-        public EncryptionResult(string keyId, string value)
+        public EncryptionResult(string keyId, T value)
         {
             KeyId = keyId;
             Value = value;
@@ -19,6 +19,6 @@ namespace Microsoft.Azure.Web.Cryptography
 
         public string KeyId { get; }
 
-        public string Value { get; }
+        public T Value { get; }
     }
 }
