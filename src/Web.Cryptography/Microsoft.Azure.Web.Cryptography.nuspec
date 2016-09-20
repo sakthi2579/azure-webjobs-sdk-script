@@ -3,28 +3,19 @@
   <metadata>
     <id>Microsoft.Azure.Web.Cryptography</id>
     <title>Microsoft.Azure.Web.Cryptography</title>
-    <version>$NuGetPackageVersion$</version>
+    <version>0.1</version>
     <authors>Microsoft</authors>
     <copyright>&#169; Microsoft Corporation. All rights reserved.</copyright>
-    <summary>Microsoft.Azure.WebJobs.Script enables a multi-language scripting model for the WebJobs SDK.</summary>
-    <description>This package contains the runtime assemblies for Microsoft.Azure.WebJobs.Script. For more information, please visit http://github.com/Azure/azure-webjobs-sdk-script</description>
+    <summary>Microsoft.Azure.Web.Cryptography provides types to assist with secret encryption and other cryptographic operations when running on Azure App Service.</summary>
+    <description>This package provides types to assist with secret encryption and other cryptographic operations when running on Azure App Service (Web Apps, Mobile Apps, Azure Functions, etc.).</description>
     <language>en-US</language>
     <projectUrl>https://azure.microsoft.com/en-us/documentation/articles/websites-webjobs-resources</projectUrl>
-    <licenseUrl>$PackageEULA$</licenseUrl>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnetcomponent_rtw_enu.htm</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <tags>Microsoft Azure WebJobs Jobs Script Node.js</tags>
-    <dependencies>
-      <dependency id="Microsoft.Azure.WebJobs" version="2.0.0-beta1-10398" />
-      <dependency id="Microsoft.Azure.WebJobs.ServiceBus" version="2.0.0-beta1-10398" />
-      <dependency id="Microsoft.Azure.WebJobs.Extensions" version="2.0.0-beta1-10364" />
-      <dependency id="Microsoft.Azure.WebJobs.Extensions.SendGrid" version="2.0.0-beta1-10364" />
-      <dependency id="Microsoft.Azure.WebJobs.Extensions.ApiHub" version="1.0.0-beta1-10364" />
-      <dependency id="Microsoft.Azure.WebJobs.Extensions.DocumentDB" version="1.0.0-beta1-10364" />
-      <dependency id="Microsoft.Azure.WebJobs.Extensions.MobileApps" version="1.0.0-beta1-10364" />
-      <dependency id="Microsoft.Azure.WebJobs.Extensions.NotificationHubs" version="1.0.0-beta1-10364" />
-      <dependency id="Edge.js" version="6.4.0" />
-      <dependency id="Microsoft.CodeAnalysis.CSharp.Scripting" version="1.3.2" />
-      <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
-    </dependencies>
+    <tags>Microsoft Azure Web Cryptography</tags>
   </metadata>
+  <files>
+    <file src="bin\$Configuration$\Microsoft.Azure.Web.Cryptography.dll" target="lib\net46" /> 
+    <file src="bin\$Configuration$\Microsoft.Azure.Web.Cryptography.xml" target="lib\net46" /> 
+  </files>
 </package>
