@@ -69,7 +69,7 @@ namespace Web.Cryptography.Tests
 
             using (var testVariables = new TestScopedEnvironmentVariable(new Dictionary<string, string>
             {
-                { DefaultEncryptionKeyResolver.DefaultEncryptionKeyId, testKeyId },
+                { Constants.AzureWebsiteEncryptionKeyId, testKeyId },
                 { testKeyId, testKey },
             }))
             {
